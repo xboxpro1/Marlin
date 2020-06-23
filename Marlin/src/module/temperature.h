@@ -148,6 +148,14 @@ enum ADCSensorState : char {
   #if ENABLED(FILAMENT_WIDTH_SENSOR)
     Prepare_FILWIDTH, Measure_FILWIDTH,
   #endif
+  #if ENABLED(POWER_MONITOR_CURRENT)
+    Prepare_POWER_MONITOR_CURRENT,
+    Measure_POWER_MONITOR_CURRENT,
+  #endif
+  #if ENABLED(POWER_MONITOR_VOLTAGE)
+    Prepare_POWER_MONITOR_VOLTAGE,
+    Measure_POWER_MONITOR_VOLTAGE,
+  #endif
   #if HAS_ADC_BUTTONS
     Prepare_ADC_KEY, Measure_ADC_KEY,
   #endif
@@ -483,6 +491,7 @@ class Temperature {
       #define FANS_LOOP(I) LOOP_L_N(I, FAN_COUNT)
 
       static void set_fan_speed(const uint8_t target, const uint16_t speed);
+      static void report_fan_speed(const uint8_t target);
 
       #if EITHER(PROBING_FANS_OFF, ADVANCED_PAUSE_FANS_PAUSE)
         static bool fans_paused;
